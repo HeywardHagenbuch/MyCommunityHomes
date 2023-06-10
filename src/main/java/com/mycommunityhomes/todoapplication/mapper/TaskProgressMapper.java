@@ -20,8 +20,14 @@ public class TaskProgressMapper implements IMapper<TaskInProgress, Task> {
 		task.setCreatedDate(LocalDateTime.now());
 		task.setEta(in.getEta());
 		task.setFinished(false);
-		task.setTaskStatus(TaskStatus.IN_PROGRESS);
-		
+		if (in.getEta().isBefore(LocalDateTime.now())) {
+			task.setTaskStatus(TaskStatus.OVERDUE);
+		}
+		if (task.getFinished()) {
+			task.setTaskStatus(TaskStatus.COMPLETED);
+		} else {
+			task.setTaskStatus(TaskStatus.IN_PROGRESS);
+		}
 		return task;
 	}
 
