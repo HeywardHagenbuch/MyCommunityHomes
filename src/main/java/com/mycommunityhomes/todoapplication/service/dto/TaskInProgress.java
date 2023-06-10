@@ -1,5 +1,6 @@
 package com.mycommunityhomes.todoapplication.service.dto;
 
+import com.mycommunityhomes.todoapplication.persistence.model.TaskStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,4 +17,5 @@ public class TaskInProgress {
     private String title;
     private String description;
     private LocalDateTime eta;
+    private TaskStatus taskStatus;
 }

@@ -44,11 +44,7 @@ public class TaskController {
         this.taskService.updateTaskAsFinished(id);
     }
 
-    @PatchMapping("/update_status/{id}/{status}")
-    @ResponseStatus(value = org.springframework.http.HttpStatus.NO_CONTENT)
-    public void updateTaskStatus(@PathVariable("id") Long id, @PathVariable("status") TaskStatus status) {
-        this.taskService.updateTaskStatus(id, status);
-    }
+    // implement put method to update status once completed
 
     @DeleteMapping("/{id}")
     @ResponseStatus(value = org.springframework.http.HttpStatus.NO_CONTENT)

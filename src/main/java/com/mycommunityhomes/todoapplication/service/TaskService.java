@@ -46,15 +46,6 @@ public class TaskService {
         this.taskRepository.markTaskAsFinished(id);
     }
 
-    @Transactional
-    public void updateTaskStatus(Long id, TaskStatus status) {
-        Optional<Task> optionalTask = this.taskRepository.findById(id);
-        if(optionalTask.isEmpty()) {
-            throw new TaskException("Task not found", HttpStatus.NOT_FOUND);
-        }
-        this.taskRepository.updateTaskStatus(id, status);
-    }
-
     public void deleteTask(Long id) {
         Optional<Task> optionalTask = this.taskRepository.findById(id);
         if(optionalTask.isEmpty()) {
