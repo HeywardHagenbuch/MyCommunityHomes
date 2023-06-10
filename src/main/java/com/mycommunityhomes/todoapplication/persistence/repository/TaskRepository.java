@@ -10,10 +10,15 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
-    public List<Task> findAllByTaskStatus(TaskStatus taskStatus);
+    List<Task> findAllByTaskStatus(TaskStatus taskStatus);
 
     @Modifying
-    @Query(value = "UPDATE task SET finished = true WHERE ID=:id", nativeQuery = true)
-    public void markTaskAsFinished(@Param("id") Long id);
+    @Query("""
+        UPDATE Task t
+        SET t.finished  = true,
+        t.taskStatus    = :taxStatus
+        WHERE t.id      = :id
+        """)
+    void markTaskAsFinished(@Param("taxStatus") TaskStatus taxStatus, @Param("id") Long id);
 
 }

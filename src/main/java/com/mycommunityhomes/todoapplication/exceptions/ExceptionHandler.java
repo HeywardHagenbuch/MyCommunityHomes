@@ -9,7 +9,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class ExceptionHandler extends ResponseEntityExceptionHandler {
 
-	@org.springframework.web.bind.annotation.ExceptionHandler(value = {TaskException.class })
+    @org.springframework.web.bind.annotation.ExceptionHandler(value = {TaskException.class})
     protected ResponseEntity<Object> handleConflict(
             TaskException ex, WebRequest request) {
         String bodyOfResponse = ex.getMessage();

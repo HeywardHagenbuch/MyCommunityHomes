@@ -43,7 +43,7 @@ public class TaskService {
         if(optionalTask.isEmpty()) {
             throw new TaskException("Task not found", HttpStatus.NOT_FOUND);
         }
-        this.taskRepository.markTaskAsFinished(id);
+        this.taskRepository.markTaskAsFinished(TaskStatus.COMPLETED, id);
     }
 
     public void deleteTask(Long id) {
@@ -54,8 +54,8 @@ public class TaskService {
         this.taskRepository.deleteById(id);
     }
 
-    public Task findTaskById() {
-        return this.taskRepository.findById(1L)
+    public Task findTaskById(Long id) {
+        return this.taskRepository.findById(id)
                 .orElseThrow(() -> new TaskException("Task not found", HttpStatus.NOT_FOUND));
     }
 }

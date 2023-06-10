@@ -4,6 +4,7 @@ import com.mycommunityhomes.todoapplication.persistence.model.Task;
 import com.mycommunityhomes.todoapplication.persistence.model.TaskStatus;
 import com.mycommunityhomes.todoapplication.service.TaskService;
 import com.mycommunityhomes.todoapplication.service.dto.TaskInProgress;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,8 +25,8 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
-    public Task findTaskById(@PathVariable String id) {
-        return this.taskService.findTaskById();
+    public Task findTaskById(@PathVariable Long id) {
+        return this.taskService.findTaskById(id);
     }
 
     @GetMapping("/status/{status}/")
@@ -38,13 +39,11 @@ public class TaskController {
         return this.taskService.createTask(taskInProgress);
     }
 
-    @PatchMapping("/mark_as_finished/{id}")
-    @ResponseStatus(value = org.springframework.http.HttpStatus.NO_CONTENT)
-    public void markAsFinished(@PathVariable("id") Long id) {
-        this.taskService.updateTaskAsFinished(id);
+    @PutMapping("/finish/{id}")
+    public ResponseEntity<String> markTaskAsFinished(@PathVariable("id") Long id) {
+        taskService.updateTaskAsFinished(id);
+        return ResponseEntity.ok("Task marked as finished.");
     }
-
-    // implement put method to update status once completed
 
     @DeleteMapping("/{id}")
     @ResponseStatus(value = org.springframework.http.HttpStatus.NO_CONTENT)
