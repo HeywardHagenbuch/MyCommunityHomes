@@ -16,6 +16,25 @@ https://github.com/HeywardHagenbuch/MyCommunityHomes/assets/54590885/a2696581-a9
 - #### GET http://localhost:8080/api/v1/tasks/{id}
 - ### Create Task
 - #### POST http://localhost:8080/api/v1/tasks/
+
+#### Post Body
+- title: String
+- description: String
+- createdDate: LocalDateTime
+- eta: LocalDateTime
+- finished: boolean
+- taskStatus: Enum
+
+#### Sample Payload:
+{
+    "title": "Groceries",
+    "description": "Buy groceries for the week",
+    "createdDate": "2023-06-10T12:59:11.332",
+    "eta": "2023-07-10T02:59:11.332",
+    "finished": false, 
+    "taskStatus": "IN_PROGRESS"
+}
+
 - ### Update Completed Task By Id
 - #### PUT http://localhost:8080/api/v1/tasks/finish/{id}
 - ### Delete Task By Id
