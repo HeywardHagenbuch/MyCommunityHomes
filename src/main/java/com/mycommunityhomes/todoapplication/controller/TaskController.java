@@ -4,6 +4,7 @@ import com.mycommunityhomes.todoapplication.persistence.model.Task;
 import com.mycommunityhomes.todoapplication.persistence.model.TaskStatus;
 import com.mycommunityhomes.todoapplication.service.TaskService;
 import com.mycommunityhomes.todoapplication.service.dto.TaskInProgress;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,23 +21,23 @@ public class TaskController {
     }
 
     @GetMapping
-    public List<Task> findAllTasks() {
-        return this.taskService.findAllTasks();
+    public ResponseEntity<List<Task>> findAllTasks() {
+        return new ResponseEntity<>(taskService.findAllTasks(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Task findTaskById(@PathVariable Long id) {
-        return this.taskService.findTaskById(id);
+    public ResponseEntity<Task> findTaskById(@PathVariable ("id") Long id) {
+        return new ResponseEntity<>(taskService.findTaskById(id), HttpStatus.OK);
     }
 
     @GetMapping("/status/{status}/")
-    public List<Task> findAllByTaskStatus(@PathVariable("status") TaskStatus status) {
-        return this.taskService.findAllTasksByStatus(status);
+    public ResponseEntity<List<Task>> findAllByTaskStatus(@PathVariable("status") TaskStatus status) {
+        return new ResponseEntity<>(taskService.findAllTasksByStatus(status), HttpStatus.OK);
     }
 
     @PostMapping
-    public Task createTask(@RequestBody TaskInProgress taskInProgress) {
-        return this.taskService.createTask(taskInProgress);
+    public ResponseEntity<Task> createTask(@RequestBody TaskInProgress taskInProgress) {
+        return new ResponseEntity<>(taskService.createTask(taskInProgress), HttpStatus.CREATED);
     }
 
     @PutMapping("/finish/{id}")
@@ -46,8 +47,8 @@ public class TaskController {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(value = org.springframework.http.HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTask(@PathVariable("id") Long id) {
-        this.taskService.deleteTask(id);
+        taskService.deleteTask(id);
     }
 }
