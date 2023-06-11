@@ -16,9 +16,8 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     @Query("""
         UPDATE Task t
         SET t.finished  = true,
-        t.taskStatus    = :taxStatus
+        t.taskStatus    = :taskStatus
         WHERE t.id      = :id
         """)
-    void markTaskAsFinished(@Param("taxStatus") TaskStatus taxStatus, @Param("id") Long id);
-
+    void markTaskAsFinished(@Param("taskStatus") TaskStatus taskStatus, @Param("id") Long id);
 }
