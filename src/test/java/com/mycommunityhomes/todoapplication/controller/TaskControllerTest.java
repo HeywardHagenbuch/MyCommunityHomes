@@ -94,6 +94,4 @@ public class TaskControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("Task marked as finished."));
     }
-
-
 }
